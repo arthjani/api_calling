@@ -1,0 +1,40 @@
+package com.api.calling;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+
+public class ApiCalling {
+
+	public static void main(String[] args) throws IOException, InterruptedException {
+		
+		
+	//	OkHttpClient client = new OkHttpClient();
+
+	//	Request request = new Request.Builder()
+			//.url("https://weatherapi-com.p.rapidapi.com/ip.json?q=%3CREQUIRED%3E")
+			//.get()
+			//.addHeader("x-rapidapi-host", "weatherapi-com.p.rapidapi.com")
+			//.addHeader("x-rapidapi-key", "SIGN-UP-FOR-KEY")
+			//.build();
+
+		//Response response = client.newCall(request).execute();
+		
+		var url = "https://weatherapi-com.p.rapidapi.com/ip.json?q=%3CREQUIRED%3E";
+		var request = HttpRequest.newBuilder().GET().uri(URI.create(url))
+				      .header("x-rapidapi-host", "weatherapi-com.p.rapidapi.com")
+				      .header("x-rapidapi-key", "SIGN-UP-FOR-KEY").build();
+		var client = HttpClient.newBuilder().build();
+		var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+		
+		
+		System.out.println(response.statusCode());
+		System.out.println(response.body());
+
+
+	}
+
+}
